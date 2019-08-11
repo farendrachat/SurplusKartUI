@@ -1,0 +1,160 @@
+<app-header [isUserLoggedIn]="true" ></app-header>
+<div class="col-md-12 mat-app-background">
+  <h2 class="text-center">Add Product</h2>
+  <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()"> 
+    <!-- <form [formGroup]="addProductForm" enctype="multipart/form-data" (ngSubmit)="onSubmit()">        -->
+
+    <!-- <div class="form-group row">
+      <label class="col-sm-4" for="product">Product Category:</label>
+      <input formControlName="product" placeholder="Product Category" name="product" class="form-control" class="col-md-8" id="product" >
+      <span *ngIf="!addForm.get('fname').valid && addForm.get('fname').touched"
+      class="help-block">Please enter a valid Name</span>
+    </div> -->
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="name">Name of Product:</label>
+      <input formControlName="name" placeholder="Like coco powder" name="name" class="form-control" class="col-sm-8" id="name">
+      <span *ngIf="!addProductForm.get('name').valid && addProductForm.get('name').touched"
+      class="help-block">Please enter a valid product</span>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="category">Category :</label> 
+      <select formControlName="category" placeholder="Category" name="category" class="form-control" class="col-sm-8" id="category">
+          <option value="Other">--Other--</option>
+          <option *ngFor='let category of arrCategory' value={{category}}>
+              {{category}}
+          </option>
+      </select>     
+      <!-- <input formControlName="category" placement="top" ngbTooltip="Tooltip on top" placeholder="Category" name="category" class="form-control" class="col-sm-8" id="category"> -->
+      <span *ngIf="!addProductForm.get('category').valid && addProductForm.get('category').touched"
+      class="help-block">Please enter a valid category</span>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-8">Product Location :</label>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="state">State:</label>
+      <select formControlName="state" placeholder="State" name="state" class="form-control" class="col-sm-8" id="state">
+          <option *ngFor='let stat of states' value={{stat}}>
+              {{stat}}
+          </option>
+      </select>   
+    </div>
+  <div class="form-group row"> 
+      <label class="col-sm-4 control-label required" for="city">City:</label>
+      <input formControlName="city" placeholder="City" name="city" class="form-control" class="col-sm-8" id="city">
+      <span *ngIf="!addProductForm.get('city').valid && addProductForm.get('city').touched"
+      class="help-block">Please enter a valid City</span>
+    </div>    
+
+    <div class="form-group row">
+      <label class="col-sm-4" for="brand">Brand:</label>
+      <input formControlName="brand" placeholder="brand" name="brand" class="form-control" class="col-sm-8" id="brand">
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="dateManufacture">Date of Manufacture:</label>
+      <input type='date' formControlName="dateManufacture" placeholder="DD/MM/YYYY" name="dateManufacture" class="form-control" class="col-sm-8" id="dateManufacture">
+      <span *ngIf="!addProductForm.get('dateManufacture').valid && addProductForm.get('dateManufacture').touched"
+      class="help-block">Please enter a valid date</span>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="dateExpire">Product Expiry Date:</label>
+      <input type='date' formControlName="dateExpire" placeholder="Date Expire" name="dateExpire" class="form-control" class="col-sm-8" id="dateExpire">
+      <span *ngIf="!addProductForm.get('dateExpire').valid && addProductForm.get('dateExpire').touched"
+      class="help-block">Please enter a valid date</span>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="packSize">Size of packet :</label>
+      <input formControlName="packSize" placeholder="Size of packet in kg/lt etc" name="packSize" class="form-control" class="col-sm-8" id="packSize">
+      <span *ngIf="!addProductForm.get('packSize').valid && addProductForm.get('packSize').touched"
+      class="help-block">Please enter a valid packSize</span>
+    </div>    
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="availableQty">Available Quantity :</label> 
+      <input formControlName="availableQty" placeholder="Available Quantity" name="availableQty" class="form-control" class="col-sm-8" id="availableQty">
+      <span *ngIf="!addProductForm.get('availableQty').valid && addProductForm.get('availableQty').touched"
+      class="help-block">Please enter a valid quantity</span>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-4 control-label required" for="qtyExpressed">Quantity Expressed Unit :</label> 
+        <select formControlName="qtyExpressed" placeholder="Product unit expresse in KG/LT/NO" name="qtyExpressed" class="form-control" class="col-sm-8" id="qtyExpressed">
+           <option *ngFor='let qty of quantityExpressUnit' value={{qty}}>
+                {{qty}}
+            </option>
+        </select>       
+        <span *ngIf="!addProductForm.get('qtyExpressed').valid && addProductForm.get('qtyExpressed').touched"
+        class="help-block">Please enter a valid quantity expressed unit</span>
+      </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="unitPrice">Price per (KG/LT/NO) :</label>
+      <input formControlName="unitPrice" placeholder="Price Per Unit" name="unitPrice" class="form-control" class="col-sm-8" id="unitPrice">
+      <span *ngIf="!addProductForm.get('unitPrice').valid && addProductForm.get('unitPrice').touched"
+      class="help-block">Please enter a valid unitPrice</span>
+    </div>
+    
+    <div class="form-group row">
+      <label class="col-sm-4">Attachments :</label>     
+    </div>
+    
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="pic1">Pic1 :</label>
+      <!-- <input type="file" (change)="onFileSelected($event,'pic1')" id="pic1" class="form-control" class="col-sm-8" id="pic1"> -->
+       <input type="file" (change)="onFileSelected($event,'pic1')" id="pic1"> 
+      <span *ngIf="!addProductForm.get('pic1').valid && addProductForm.get('pic1').touched"
+      class="help-block">Please select a valid file</span>
+    </div>    
+
+    <div class="form-group row">
+      <label class="col-sm-4" for="pic2">Pic2 :</label>
+      <input type="file" (change)="onFileSelected($event,'pic2')" id="pic2">
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4" for="pic3">Pic 3 :</label>
+      <input type="file" (change)="onFileSelected($event,'pic3')"  id="pic3">
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4" for="pic4">Pic 4 :</label>
+      <input type="file" (change)="onFileSelected($event,'pic4')" id="pic4">
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="coa">Certificate of Analysis :</label>
+      <input type="file" (change)="onFileSelected($event,'coa')" id="coa">
+      <!-- <span *ngIf="!addProductForm.get('fname').valid && addProductForm.get('fname').touched"
+      class="help-block">Please select a valid file</span> -->
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="specificationSheet">Specification Sheet :</label>     
+      <input type="file" (change)="onFileSelected($event,'specificationSheet')" id="specificationSheet">     
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="msds">Material Safety Data Sheet :</label>
+      <input type="file" (change)="onFileSelected($event,'msds')" id="msds">
+    </div>
+    <!-- SHOULD BE IN LIST <div class="form-group row">
+        <label class="col-sm-4" for="approved">Product Approved for Sell :</label>
+        <input formControlName="approved" placeholder="Certificate of Analysis" name="approved" class="form-control" class="col-sm-8" id="approved">
+     </div> -->
+
+    <!-- SHOULD BE IN ADMIN LIST <div class="form-group">       
+        <input type="hidden" formControlName="updateOn" name="updateOn" class="form-control" id="updateOn">
+        <input type="hidden" formControlName="loadedBy" name="loadedBy" class="form-control" id="loadedBy">
+        <input type="hidden" formControlName="approvedBy" name="approvedBy" class="form-control" id="approvedBy">
+     </div> -->
+   <span *ngIf="!addProductForm.valid && addProductForm.touched"
+      class="help-block">Please select valid data</span>
+    <!-- <button type="submit" class="btn btn-primary" [disabled]="!addProductForm.valid">Save</button> -->
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="reset" class="btn btn-success" id="reset-btn" ng-click="addProductForm.reset">Reset</button> 
+  </form>
+</div>

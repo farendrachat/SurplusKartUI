@@ -1,0 +1,44 @@
+<app-header></app-header>
+<div class="row">
+
+  <div class="col-md-6 col-md-offset-2">
+    <h1>Login </h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Please enter a valid email or mobile:</label>
+     
+      <div>
+        <label for="email">Email:</label>
+        <input type = "email" class="form-control" formControlName="email" id="email">
+      </div>
+      <div>
+        <label for="mobile">Mobile:</label>
+        <input class="form-control" formControlName="mobile" id="mobile">
+      </div>
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email/mobile with anyone else.</small>
+    </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" formControlName="password" id="password">
+        <span *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched"
+        class="help-block">Please enter the password</span>
+      </div>
+      <div class="form-group">
+        <label for="pwd">Role:</label>
+        <select formControlName="role" placeholder="role" name="role" class="form-control" class="col-sm-8" id="role">
+          <option *ngFor='let role of roles' value={{role}}>
+              {{role}}
+          </option>
+      </select> 
+      <span *ngIf="!loginForm.get('role').valid && loginForm.get('role').touched"
+        class="help-block">Please select a role</span>  
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Save</button>
+      <button type="reset" class="btn btn-success" id="reset-btn" ng-click="loginForm.reset">Reset</button>
+      <button class="btn btn-primary" (click)="onLoginClick()">facebook</button> 
+      <div *ngIf="invalidLogin" class="error">
+        <div>Invalid credentials.</div>
+      </div>
+    </form>
+  </div>
+</div>

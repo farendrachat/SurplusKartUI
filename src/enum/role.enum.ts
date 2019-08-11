@@ -1,0 +1,3 @@
+export enum Role {
+    GUEST,SELLER,BUYER,CONSULTANT,MANAGER,ADMIN
+}
