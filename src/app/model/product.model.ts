@@ -17,4 +17,5 @@ approved: boolean;
 updateon: string;
 approvedby: string;
 loadedby: string; 
+pic1: File;
 }

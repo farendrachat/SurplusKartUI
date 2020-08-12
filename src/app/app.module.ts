@@ -26,6 +26,7 @@ import { ProductSellService } from './service/product-sell.service';
 import { HomeComponent } from './home/home.component';
 import { MaterialModule } from './material';
 import{BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ImagesAddComponent } from './images-add/images-add.component';
 
 //import { DropdownDirective } from './shared/dropdown.directive';
 //import { AddUserAdministrationComponent } from './add-user-administration/add-user-administration.component';
@@ -48,6 +49,7 @@ import{BrowserAnimationsModule} from '@angular/platform-browser/animations';
         UserComponent,
         SelfComponent,
         HomeComponent,
+        ImagesAddComponent,
       //  DropdownDirective
      //   AddUserAdministrationComponent
     ],

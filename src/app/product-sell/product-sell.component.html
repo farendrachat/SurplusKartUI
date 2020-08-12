@@ -21,11 +21,10 @@
     <div class="form-group row">
       <label class="col-sm-4 control-label required" for="category">Category :</label> 
       <select formControlName="category" placeholder="Category" name="category" class="form-control" class="col-sm-8" id="category">
-          <option value="Other">--Other--</option>
-          <option *ngFor='let category of arrCategory' value={{category}}>
-              {{category}}
-          </option>
+          <option value="Other">--Other--</option>        
+          <option *ngFor="let itemi of arrCategory" value={{itemi}}>{{itemi}}</option>
       </select>     
+     
       <!-- <input formControlName="category" placement="top" ngbTooltip="Tooltip on top" placeholder="Category" name="category" class="form-control" class="col-sm-8" id="category"> -->
       <span *ngIf="!addProductForm.get('category').valid && addProductForm.get('category').touched"
       class="help-block">Please enter a valid category</span>
@@ -103,10 +102,12 @@
       <label class="col-sm-4">Attachments :</label>     
     </div>
     
-    <div class="form-group row">
+    <!-- <div class="form-group row">
       <label class="col-sm-4 control-label required" for="pic1">Pic1 :</label>
-      <!-- <input type="file" (change)="onFileSelected($event,'pic1')" id="pic1" class="form-control" class="col-sm-8" id="pic1"> -->
-       <input type="file" (change)="onFileSelected($event,'pic1')" id="pic1"> 
+ <input type="file" (change)="onFileSelected($event,'pic1')" id="pic1" class="form-control" class="col-sm-8" id="pic1"> -->
+       <!-- <input type="file" class="form-control" formControlName="pic1" name="pic1" (change)="onFileSelected($event,'pic1')" id="pic1">  
+       <input type="file" class="form-control" formControlName="pic1" name="pic1" (change)="onFileChanged($event)" id="pic1"> 
+       <img [src]="imgURL" height="200" *ngIf="imgURL">
       <span *ngIf="!addProductForm.get('pic1').valid && addProductForm.get('pic1').touched"
       class="help-block">Please select a valid file</span>
     </div>    
@@ -129,8 +130,8 @@
     <div class="form-group row">
       <label class="col-sm-4 control-label required" for="coa">Certificate of Analysis :</label>
       <input type="file" (change)="onFileSelected($event,'coa')" id="coa">
-      <!-- <span *ngIf="!addProductForm.get('fname').valid && addProductForm.get('fname').touched"
-      class="help-block">Please select a valid file</span> -->
+    <span *ngIf="!addProductForm.get('fname').valid && addProductForm.get('fname').touched"
+      class="help-block">Please select a valid file</span> 
     </div>
 
     <div class="form-group row">
@@ -140,7 +141,7 @@
     <div class="form-group row">
       <label class="col-sm-4 control-label required" for="msds">Material Safety Data Sheet :</label>
       <input type="file" (change)="onFileSelected($event,'msds')" id="msds">
-    </div>
+    </div> -->
     <!-- SHOULD BE IN LIST <div class="form-group row">
         <label class="col-sm-4" for="approved">Product Approved for Sell :</label>
         <input formControlName="approved" placeholder="Certificate of Analysis" name="approved" class="form-control" class="col-sm-8" id="approved">
@@ -151,10 +152,13 @@
         <input type="hidden" formControlName="loadedBy" name="loadedBy" class="form-control" id="loadedBy">
         <input type="hidden" formControlName="approvedBy" name="approvedBy" class="form-control" id="approvedBy">
      </div> -->
-   <span *ngIf="!addProductForm.valid && addProductForm.touched"
-      class="help-block">Please select valid data</span>
-    <!-- <button type="submit" class="btn btn-primary" [disabled]="!addProductForm.valid">Save</button> -->
-    <button type="submit" class="btn btn-primary">Save</button>
-    <button type="reset" class="btn btn-success" id="reset-btn" ng-click="addProductForm.reset">Reset</button> 
+     <div class="form-group row">
+      <!-- <span *ngIf="!addProductForm.valid && addProductForm.touched"
+          class="help-block">Please select valid data</span> -->
+        <!-- <button type="submit" class="btn btn-primary" [disabled]="!addProductForm.valid" name="submit">Save</button>       -->
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="reset" class="btn btn-success" id="reset-btn" ng-click="addProductForm.reset">Reset</button> 
+        <button class="btn btn-success pull-right" ><a routerLink="/add-images"> Add Documents</a></button>
+    </div>
   </form>
 </div>

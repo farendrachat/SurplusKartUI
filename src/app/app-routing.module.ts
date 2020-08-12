@@ -13,11 +13,13 @@ import {ListUserDtlComponent} from "./user/userDtl/list-userDtl/list-userDtl.com
 import {EditUserDtlComponent} from "./user/userDtl/edit-userDtl/edit-userDtl.component";
 import {UserComponent} from "./user/user/user.component";
 import {HomeComponent} from "./home/home.component";
+import {ImagesAddComponent} from "./images-add/images-add.component"
 import { NgModule } from '@angular/core';
 
 const routes: Routes = [ 
   { path: 'buy', component: ProductListComponent },
   { path: 'sell', component: ProductSellComponent },
+  { path: 'add-images', component: ImagesAddComponent },
   { path: 'addMessage', component: AddMessageComponent },
   { path: 'home', component: HomeComponent}, 
   { path: 'negotiate', component: NegotiationComponent },

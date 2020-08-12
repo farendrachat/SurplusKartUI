@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient,HttpEventType,HttpResponse } from '@angular/common/http';
 import {ProductSellService} from "../service/product-sell.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -21,71 +21,105 @@ export class ProductSellComponent implements OnInit {
   msds:File = null;
   coa:File = null;
   specificationSheet:File = null;
+  imageURL:any;
+  receivedImageData: any;
+  base64Data: any;
+  convertedImage: any;
 
-  
+  @Input()
+  productId: any = 0;
 
-  // arrCategory: any [] = [
-  //   { name: 'Bells Sparrow' },
-  //   { name: 'Mourning Dove'},
-  //   { name: 'Bald Eagle' }
-  // ];
+
   arrCategory = environment.categoryList;
   quantityExpressUnit = environment.quantityExpressUnit;
   states : string[] = (Object.keys(States)).slice(Object.keys(States).length / 2);
 
-
- // progress: { percentage: number } = { percentage: 0 };
-
   constructor(private http:HttpClient,private productSellService: ProductSellService,
     private formBuilder: FormBuilder,private router: Router) { }
 
- // constructor(private formBuilder: FormBuilder,private router: Router, private userService: UserService) { }
+    //public selectedFile:any;
+    imgURL: any;
+    public  onFileChanged(event) {
+      console.log(event);
+      this.pic1 = event.target.files[0];
+  
+      // Below part is used to display the selected image
+      let reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event2) => {
+        this.imgURL = reader.result;
+    };
+  }
 
- addProductForm: FormGroup;
+ 
+
+ addProductForm: FormGroup; 
   ngOnInit() {     
-
 this.addProductForm = this.formBuilder.group({
 offerId:[],
 sellerId:[],
 // product: ['', Validators.required],
-name: ['', [Validators.required,Validators.maxLength(50)]],
-category: ['', Validators.required],
-availableQty: ['', [Validators.required,Validators.pattern(/^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$/),Validators.maxLength(5) ]],
-qtyExpressed: ['', [Validators.required]],
-unitPrice: ['',  [Validators.required,Validators.pattern(/^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$/),Validators.maxLength(5) ]],
-// pic1: [null, Validators.required],
+name: [null, [Validators.required,Validators.maxLength(50)]],
+category: [null, Validators.required],
+availableQty: [null, [Validators.required,Validators.pattern(/^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$/),Validators.maxLength(5) ]],
+qtyExpressed: [null, [Validators.required]],
+unitPrice: [null,  [Validators.required,Validators.pattern(/^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$/),Validators.maxLength(5) ]],
+pic1: [null, Validators.required],
 // pic2:[null, Validators.required],
 // pic3: [null, Validators.required],
 // pic4: [null, Validators.required],
-state: ['', Validators.required],
-city: ['', [Validators.required,Validators.maxLength(50)]],
-brand: ['',[Validators.maxLength(50)]],
-dateManufacture: ['', Validators.required],
-dateExpire: ['', Validators.required],
-packSize: ['', [Validators.required,Validators.pattern(/^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$/),Validators.maxLength(5) ]]
-// coa: ['', Validators.required],
-// specificationSheet: ['', Validators.required],
-// msds: ['', Validators.required]
-// approved: ['', Validators.required],
-// updateOn: ['', Validators.required],
-// approvedBy: ['', Validators.required],
-// loadedBy: ['', Validators.required]    
+state: [null, Validators.required],
+city: [null, [Validators.required,Validators.maxLength(50)]],
+brand: [null,[Validators.maxLength(50)]],
+dateManufacture: [null, Validators.required],
+dateExpire: [null, Validators.required],
+packSize: [null, [Validators.required,Validators.pattern(/^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$/),Validators.maxLength(5) ]]
+// coa: [null, Validators.required],
+// specificationSheet: [null, Validators.required],
+// msds: [null, Validators.required]
+// approved: [null, Validators.required],
+// updateOn: [null, Validators.required],
+// approvedBy: [null, Validators.required],
+// loadedBy: [null, Validators.required]    
   });
 }
 
+
 onSubmit() {
-  this.productSellService.saveProduct1(this.addProductForm.value,this.pic1,this.pic2,this.pic3,
-    this.pic4,this.msds,this.coa,this.specificationSheet)
+  this.productSellService.saveProduct1(this.addProductForm.value)
  .subscribe( data => {
       console.log("data from addProductForm is :"+data);
-      alert("Data saved successfully");
+      if(data >0){
+        this.productId = data;
+        alert("Data saved Successfully");
+      }
+      else{
+        this.onSubmit2();
+      }
     },
     errorObj => {console.log("fails with error :"+errorObj.error.message);
     alert("Error while saving data :"+errorObj.error.message);
   }
-
     );
 }
+
+onSubmit2() {
+  
+  // const uploadData = new FormData();
+  // uploadData.append('pic1', this.pic1, this.pic1.name);
+  this.productSellService.pushFileToStorage(this.pic1)
+  .subscribe(
+               res => {console.log(res);
+                       this.receivedImageData = res;
+                       this.base64Data = this.receivedImageData.pic;
+                       this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data; 
+                       alert("Data and Images saved successfully");
+                    },
+               err => console.log('Error Occured during saving: ' + err)
+            );
+ }
+
+
 
   onFileSelected(event,controlName)
   {
@@ -135,21 +169,11 @@ onSubmit() {
 
 
 
-  // save(){    
-  //   this.productSellService.pushFileToStorage(this.pic1);
-
-  //   this.progress.percentage = 0;   
-  //   this.productSellService.pushFileToStorage(this.pic1).subscribe(event => {
-  //     if (event.type === HttpEventType.UploadProgress) {
-  //       this.progress.percentage = Math.round(100 * event.loaded / event.total);
-  //     } else if (event instanceof HttpResponse) {
-  //       console.log('File is completely uploaded!');
-  //     }
-  //   })
- 
-  //   this.pic1 = undefined
-  // }
+   
+  
+  }
+  
 
 
 
-}
+
