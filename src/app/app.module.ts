@@ -1,71 +1,51 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-//import{MDBBootstrapModule} from 'angular-bootstrap-md';
-import { AppComponent } from './app.component';
-import {HttpModule} from "@angular/http";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { HeaderComponent } from './header/header.component';
-import { LoginComponent } from './login/login.component';
-import { ListUserDtlComponent } from './user/userDtl/list-userDtl/list-userDtl.component';
-import { Routes,RouterModule } from '@angular/router';
-import {AddUserDtlComponent} from './user/userDtl/add-userDtl/add-userDtl.component';
-import {EditUserDtlComponent} from './user/userDtl/edit-userDtl/edit-userDtl.component';
-import { UserDtlService } from './service/userDtl.service';
-import { HttpClientModule,HttpClient  } from '@angular/common/http'; 
-import { AppRoutingModule } from './app-routing.module';
-import { ProductListComponent } from './product-list/product-list.component';
-import { StatusComponent } from './status/status.component';
-import { NegotiationComponent } from './negotiation/negotiation.component';
-import { ProductSellComponent } from './product-sell/product-sell.component';
-import { CartComponent } from './cart/cart.component';
-import { AddMessageComponent } from './message/add-message/add-message.component';
-import { ListMessageComponent } from './message/list-message/list-message.component';
-import { UserComponent } from './user/user/user.component';
-import { SelfComponent } from './self/self.component';
-import { ProductSellService } from './service/product-sell.service';
-import { HomeComponent } from './home/home.component';
-import { MaterialModule } from './material';
-import{BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { ImagesAddComponent } from './images-add/images-add.component';
 
-//import { DropdownDirective } from './shared/dropdown.directive';
-//import { AddUserAdministrationComponent } from './add-user-administration/add-user-administration.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import { LoginService } from './services/login.service';
+import { Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { UsersComponent } from './users/users.component';
+import { ProductsComponent } from './products/products.component';
+import { UsersService } from './services/users.service';
+import { StorageService } from './services/storage.service';
+import { UserComponent } from './user/user.component';
+import { ProductsService } from './services/products.service';
+import { ProductComponent } from './product/product.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { ImagesComponent } from './images/images.component';
+import { BuyerComponent } from './buyer/buyer.component';
+import { ImageShowComponent } from './image-show/image-show.component';
+import { TransactionService } from './services/transaction.service';
+
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HeaderComponent,
-        LoginComponent,
-        ListUserDtlComponent,
-        AddUserDtlComponent,
-        EditUserDtlComponent,
-        ProductListComponent,
-        StatusComponent,
-        NegotiationComponent,
-        ProductSellComponent,
-        CartComponent,
-        AddMessageComponent,
-        ListMessageComponent,
-        UserComponent,
-        SelfComponent,
-        HomeComponent,
-        ImagesAddComponent,
-      //  DropdownDirective
-     //   AddUserAdministrationComponent
-    ],
-    imports: [
-        BrowserModule,
-        HttpModule,
-        HttpClientModule,
-        FormsModule,
-        ReactiveFormsModule,
-        AppRoutingModule,
-        MaterialModule,
-        BrowserAnimationsModule  
-       // MDBBootstapModule.forRoot()
-    ],
- //   schemas:[NO_ERRORS_SCHEMA],
-    providers: [UserDtlService,ProductSellService],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HomeComponent,
+    DashboardComponent,
+    UsersComponent,
+    ProductsComponent,
+    UserComponent,
+    ProductComponent,
+    ImagesComponent,
+    BuyerComponent,
+    ImageShowComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    NgxPaginationModule
+  ],
+  providers: [UsersService,ProductsService,StorageService,TransactionService],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

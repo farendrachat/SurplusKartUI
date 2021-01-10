@@ -1,0 +1,17 @@
+<span class="card" style="width: 18rem;" *ngIf="userData.role==='ADMIN' || userData.role==='CSM'">
+    <img class="card-img-top" src="../../assets/user-image.jpg" alt="Card image cap">
+    <span class="card-body">
+      <h5 class="card-title">User</h5>
+      <p class="card-text">You can manage(add,view,edit,delete) the users using this option.</p>
+      <a (click)="onUserClick()" class="btn btn-primary" style="cursor: pointer;">Manage users</a>
+    </span>
+  </span>
+
+  <span class="card" style="width: 18rem;" >
+    <img class="card-img-top" src="../../assets/product-image.png" alt="Card image cap">
+    <span class="card-body">
+      <h5 class="card-title">Product</h5>
+      <p class="card-text">You can manage(add,view,edit,delete) products using this option.</p>
+      <a (click)="onProductClick()" class="btn btn-primary" style="cursor: pointer;">Manage products</a>
+    </span>
+  </span>

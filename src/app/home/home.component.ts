@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  //name="";
+  userData:any="";
+  constructor(private router:Router,
+    private storageService:StorageService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.userData=this.storageService.getUserData();
+    console.log("Data of users fetched is : ",this.userData);
+  }
+
+  onHomeClick(){
+    this.router.navigate(['/home']);
+  }
+
+  logout(){
+    this.router.navigate(['/login']);
   }
 
 }

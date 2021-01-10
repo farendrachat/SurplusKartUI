@@ -1,0 +1,103 @@
+<div class="container">
+    
+    <br><h2>User Details</h2>
+    <hr>
+    <br>
+    <div class="alert alert-danger" role="alert" *ngIf="message!=''" style="width:50%">
+      {{message}}
+    </div>
+    <form [formGroup]="userForm">
+      <div class="form-group">
+        <label for="userName" class="required">Username:</label>
+        <input type="text" class="form-control" placeholder="Enter username less then 20 chars" formControlName="userName">
+        <span *ngIf="!userForm.get('userName').valid && userForm.get('userName').touched" class="error">
+           user name is mandatory !!
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="password" class="required">Password:</label>
+        <input type="password" class="form-control" placeholder="Enter password less then 100 chars" formControlName="password">
+        <span *ngIf="!userForm.get('password').valid && userForm.get('password').touched" class="error">
+            password is mandatory !!
+        </span>
+    </div>
+  
+  <div class="form-group">
+    <label for="role" class="required">Role:</label>
+    <select formControlName="role" placeholder="role" name="role" class="form-control" id="role">
+      <option *ngFor='let role of arrRoles' value={{role}}>
+          {{role}}
+      </option>
+    </select>   
+      <span *ngIf="!userForm.get('role').valid && userForm.get('role').touched" class="error">
+        role is mandatory !!
+    </span>
+    <div class="form-group">
+      <label for="fullName" class="required">Full Name:</label>
+      <input type="text" class="form-control" placeholder="Full Name of the user" formControlName="fullName">
+      <span *ngIf="!userForm.get('fullName').valid && userForm.get('fullName').touched" class="error">
+         full name is mandatory and max length should be less then 100 chars !!
+      </span>
+    </div>
+  </div>
+      <div class="form-group">
+        <label for="mobile" class="required">Mobile No:</label>
+        <input type="text" class="form-control" placeholder="10 digit mobile no" formControlName="mobile">
+        <span *ngIf="!userForm.get('mobile').valid && userForm.get('mobile').touched" class="error">
+            mobile no is mandatory and must be 10 digit numeric !!
+        </span>
+    </div>
+    <div class="form-group">
+      <label for="primaryEmail" class="required">Email Id:</label>
+      <input type="email" class="form-control" placeholder="Enter official email id" formControlName="primaryEmail">
+      <span *ngIf="!userForm.get('primaryEmail').valid && userForm.get('primaryEmail').touched" class="error">
+        Valid Email id is mandatory !!
+      </span>
+  </div>
+    <div class="form-group">
+      <label for="company" class="required">Company Name:</label>
+      <input type="text" class="form-control" placeholder="Enter company name" formControlName="company">
+      <span *ngIf="!userForm.get('company').valid && userForm.get('company').touched" class="error">
+        Company Name is mandatory !!
+      </span>
+  </div>
+    <div class="form-group">
+        <label for="designation" class="required">Designation:</label>
+        <input type="text" class="form-control" placeholder="Enter designation in company" formControlName="designation">
+        <span *ngIf="!userForm.get('designation').valid && userForm.get('designation').touched" class="error">
+            Designation is mandatory !!
+        </span>
+    </div>
+    <div class="form-group">
+      <label for="address" class="required">Address:</label>
+      <input type="text" class="form-control" placeholder="Enter address of company" formControlName="address">
+      <span *ngIf="!userForm.get('address').valid && userForm.get('address').touched" class="error">
+          Address is mandatory !!
+      </span>
+  </div>
+  <div class="form-group">
+    <label for="city" class="required">City:</label>
+    <input type="text" class="form-control" placeholder="Enter designation in company" formControlName="city">
+    <span *ngIf="!userForm.get('city').valid && userForm.get('city').touched" class="error">
+        City is mandatory !!
+    </span>
+</div>
+<div class="form-group">
+  <label for="state" class="required">State:</label>
+  <input type="text" class="form-control" placeholder="Enter designation in company" formControlName="state">
+  <span *ngIf="!userForm.get('state').valid && userForm.get('state').touched" class="error">
+      State is mandatory !!
+  </span>
+</div>
+<div class="form-group">
+  <label for="pinCode" class="required">Pin Code:</label>
+  <input type="text" class="form-control" placeholder="Enter pinCode of company" formControlName="pinCode">
+  <span *ngIf="!userForm.get('pinCode').valid && userForm.get('pinCode').touched" class="error">
+      PinCode is mandatory !!
+  </span>
+</div>
+      <button class="btn btn-primary" (click)="onSubmit()" [disabled]="!userForm.valid">Save</button>&nbsp;&nbsp;&nbsp;&nbsp;
+      <button class="btn btn-primary" (click)="onReset()">Reset</button>
+    </form>
+  </div>
+

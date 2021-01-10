@@ -1,44 +1,30 @@
-<app-header></app-header>
-<div class="row">
-
-  <div class="col-md-6 col-md-offset-2">
-    <h1>Login </h1>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label>Please enter a valid email or mobile:</label>
-     
-      <div>
-        <label for="email">Email:</label>
-        <input type = "email" class="form-control" formControlName="email" id="email">
-      </div>
-      <div>
-        <label for="mobile">Mobile:</label>
-        <input class="form-control" formControlName="mobile" id="mobile">
-      </div>
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email/mobile with anyone else.</small>
+<div class="container">
+    <div class="row">
+      <div class="card text-center">
+        <div class="card-header"><b>Welcome to Surplus Kart Management </b></div>
+        <div class="card-body" style="background-color:#B8B8B8;">
+            <h5 class="card-title">Pustira Marketing</h5>
+            <hr>
+                <form [formGroup]="loginForm" (submit)="onSubmit()">
+                <div class="form-group">
+                <label for="username" style="color: white;">Username :</label>
+                <input type="text" class="form-control" formControlName="username">
+                <span *ngIf="!loginForm.get('username').valid && loginForm.get('username').touched" class="error">
+                    username is mandatory !!
+                </span>
+                <br>
+                <label for="password" style="color: white;">Password :</label>
+                <input type="password" class="form-control" formControlName="password">
+                <span *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched" class="error">
+                    password is mandatory !!
+                </span>
+                </div>  
+                <button class="btn btn-primary" [disabled]="!loginForm.valid">Login</button>
+                <br><br>
+                <div class="error" *ngIf="showLoginError" style="background-color: yellow;">{{message}}</div>
+                </form>
+        </div>
     </div>
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" class="form-control" formControlName="password" id="password">
-        <span *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched"
-        class="help-block">Please enter the password</span>
-      </div>
-      <div class="form-group">
-        <label for="pwd">Role:</label>
-        <select formControlName="role" placeholder="role" name="role" class="form-control" class="col-sm-8" id="role">
-          <option *ngFor='let role of roles' value={{role}}>
-              {{role}}
-          </option>
-      </select> 
-      <span *ngIf="!loginForm.get('role').valid && loginForm.get('role').touched"
-        class="help-block">Please select a role</span>  
-      </div>
-      <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Save</button>
-      <button type="reset" class="btn btn-success" id="reset-btn" ng-click="loginForm.reset">Reset</button>
-      <button class="btn btn-primary" (click)="onLoginClick()">facebook</button> 
-      <div *ngIf="invalidLogin" class="error">
-        <div>Invalid credentials.</div>
-      </div>
-    </form>
   </div>
-</div>
+  <br><br> <br><br> <br><br><br><br> <br><br> <br><br>
+  </div>

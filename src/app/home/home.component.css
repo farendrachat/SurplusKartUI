@@ -1,0 +1,23 @@
+.navbar{
+    display: -webkit-box;
+    height: 70px;
+}
+
+
+.btn-primary{
+    margin-right: 0px;
+    margin-left: 0px;
+    /* background-color: blue; */
+    background-color:yellow;
+    color:orange;
+    height:50px ;
+}
+
+.icon{
+    vertical-align: -webkit-baseline-middle;
+    height: 46px;
+    position: absolute;
+    right: 1%;
+    margin: 2px;
+    cursor: pointer;
+}

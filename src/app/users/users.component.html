@@ -1,0 +1,39 @@
+
+<div class="container">
+    <br><br>
+    <div *ngIf="userData.role==='ADMIN'">
+    <h2 style="display: inline;">Add User</h2>
+    <a (click)="onAdd()"><img src="../../assets/add-user-icon.png" style="cursor: pointer;"></a>
+  
+    <br><br>
+    <div class="alert alert-danger" role="alert" *ngIf="createMessage!=''" style="width:80%">
+      {{createMessage}}
+    </div>
+  </div>
+    <hr>
+    <br>
+    <p>{{message}} </p>            
+    <table class="table table-hover" *ngIf="users">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Role</th>
+            <!-- <th>Department</th>
+            <th>Primary Skill</th> -->
+          <th *ngIf="userData.role==='ADMIN'">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.userName}}</td>
+          <td>{{user.role}}</td>
+          <!--<td>{{user.userId}}</td>
+           <td>{{user.primarySkill}}</td> -->
+          <td *ngIf="userData.role==='ADMIN'"><a (click)="onEdit(user.userId)"><img src="../../assets/edit-icon.png" class="icon"></a>
+            <a (click)="onDelete(user.userId)"><img src="../../assets/delete-icon.png" class="icon"></a>      
+          </td> 
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

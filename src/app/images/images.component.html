@@ -1,0 +1,80 @@
+<!-- <app-header [isUserLoggedIn]="true" ></app-header> -->
+<div class="col-md-12 mat-app-background">
+  <h2 class="text-center">Add Images</h2>
+  <form [formGroup]="addImagesForm" (ngSubmit)="onSubmit()"> 
+   
+
+    <!-- <div class="form-group row">      
+       <input type="hidden" formControlName="productId" placeholder="Id received by Adding Product" name="productId" class="form-control" class="col-sm-8" id="productId"> 
+      <input formControlName="productId" placeholder="Id received by Adding Product" 
+      value=(this.prId) name="productId" class="form-control" class="col-sm-3" id="productId">
+    </div> -->
+    
+    <div class="form-group row form-group required">
+      <label class="col-sm-2 control-label" for="pic1">Pic1:</label>
+       <input type="file" data-max-size="1048" class="form-control" formControlName="pic1" name="pic1" 
+       (change)="onFileSelected($event,'pic1')" id="pic1" class="col-sm-3" required> 
+      <img [src]="imgURL" height="200" *ngIf="imgURL">
+      <span *ngIf="!addImagesForm.get('pic1').valid && addImagesForm.get('pic1').touched"
+      class="help-block">Please select a valid file</span>
+      <span *ngIf="addImagesForm.get('pic1').valid && addImagesForm.get('pic1').touched">
+        <img [src]="imgURL" height="200" *ngIf="imgURL">
+      </span>
+    </div>    
+
+    <div class="form-group row">
+      <label class="col-sm-2 control-label" for="pic2">Pic2 :</label>
+      <input type="file" class="form-control" formControlName="pic2" name="pic2"  
+      (change)="onFileSelected($event,'pic2')" id="pic2" class="col-sm-3">
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 control-label" for="pic3">Pic 3 :</label>
+      <input type="file" class="form-control" formControlName="pic3" name="pic3"  
+      (change)="onFileSelected($event,'pic3')"  id="pic3" class="col-sm-3">
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 control-label" for="pic4">Pic 4 :</label>
+      <input type="file" class="form-control" formControlName="pic4" name="pic4" 
+      (change)="onFileSelected($event,'pic4')" id="pic4" class="col-sm-3">
+    </div>
+
+    <div class="form-group row form-group required">
+      <label class="col-sm-2 control-label" for="coa">Certificate of Analysis :</label>
+      <input type="file" class="form-control" formControlName="coa" name="coa" 
+      (change)="onFileSelected($event,'coa')" id="coa" class="col-sm-3">
+      <!-- <span *ngIf="!addImagesForm.get('fname').valid && addImagesForm.get('fname').touched"
+      class="help-block">Please select a valid file</span> -->
+    </div>
+
+    <div class="form-group row form-group required">
+      <label class="col-sm-2 control-label" for="specificationSheet">Specification Sheet :</label>     
+      <input type="file" class="form-control" formControlName="specificationSheet" 
+      name="specificationSheet" (change)="onFileSelected($event,'specificationSheet')" 
+      id="specificationSheet" class="col-sm-3">     
+    </div>
+    <div class="form-group row form-group required">
+      <label class="col-sm-2 control-label" for="msds">Material Safety Data Sheet:</label>
+      <input type="file" class="form-control" formControlName="msds" name="msds" 
+      (change)="onFileSelected($event,'msds')" id="msds" class="col-sm-3">
+    </div>
+    <!-- <div class="form-group row">
+        <label class="col-sm-2" for="approved">Product Approved for Sell :</label>
+        <input formControlName="approved" placeholder="Certificate of Analysis" name="approved" class="form-control" class="col-sm-8" id="approved">
+     </div> -->
+
+    <!-- SHOULD BE IN ADMIN LIST <div class="form-group">       
+        <input type="hidden" formControlName="updateOn" name="updateOn" class="form-control" id="updateOn">
+        <input type="hidden" formControlName="loadedBy" name="loadedBy" class="form-control" id="loadedBy">
+        <input type="hidden" formControlName="approvedBy" name="approvedBy" class="form-control" id="approvedBy">
+     </div> -->
+     <div class="form-group row">
+      <!-- <span *ngIf="!addImagesForm.valid && addImagesForm.touched"
+          class="help-block">Please select valid data</span> -->
+        <!-- <button type="submit" class="btn btn-primary" [disabled]="!addImagesForm.valid" name="submit">Save</button>       -->
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="reset" class="btn btn-success" id="reset-btn" ng-click="addImagesForm.reset">Reset</button> 
+    </div>
+  </form>
+</div>

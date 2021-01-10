@@ -1,0 +1,68 @@
+<!-- <app-header [isUserLoggedIn]="true" ></app-header> -->
+<div class="col-md-12 mat-app-background">
+    <h2 class="text-center">Available Images</h2>
+    <form [formGroup]="imagesForm"> 
+     
+  
+      <!-- <div class="form-group row">      
+         <input type="hidden" formControlName="productId" placeholder="Id received by Adding Product" name="productId" class="form-control" class="col-sm-8" id="productId"> 
+        <input formControlName="productId" placeholder="Id received by Adding Product" 
+        value=(this.prId) name="productId" class="form-control" class="col-sm-3" id="productId">
+      </div> -->
+      
+      <div class="form-group row form-group required">
+        <label class="col-sm-2 control-label" for="pic1">Pic1:</label>
+         <!-- <input type="file" data-max-size="1048" class="form-control" formControlName="pic1" name="pic1" 
+          id="pic1" class="col-sm-3" >  -->
+          <img [src]="pic1" height=200>      
+      </div>    
+  
+      <div class="form-group row">
+        <label class="col-sm-2 control-label" for="pic2">Pic2 :</label>
+        <!-- <input type="file" class="form-control" formControlName="pic2" name="pic2"  
+        (change)="onFileSelected($event,'pic2')" id="pic2" class="col-sm-3"> -->
+        <img [src]="pic2" height="200" *ngIf="pic2">     
+      </div>
+  
+      <div class="form-group row">
+        <label class="col-sm-2 control-label" for="pic3">Pic 3 :</label>
+        <img [src]="pic3" height="200" *ngIf="pic3">  
+      </div>
+  
+      <div class="form-group row">
+        <label class="col-sm-2 control-label" for="pic4">Pic 4 :</label>
+        <img [src]="pic4" height="200" *ngIf="pic4">  
+      </div>
+  
+      <div class="form-group row form-group required">
+        <label class="col-sm-2 control-label" for="coa">Certificate of Analysis :</label>
+        <img [src]="coa" height="200" *ngIf="coa">  
+      </div>
+  
+      <div class="form-group row form-group required">
+        <label class="col-sm-2 control-label" for="specificationSheet">Specification Sheet :</label>     
+        <img [src]="specificationSheet" height="200" *ngIf="specificationSheet">  
+      </div>
+      <div class="form-group row form-group required">
+        <label class="col-sm-2 control-label" for="msds">Material Safety Data Sheet:</label>
+        <img [src]="msds" height="200" *ngIf="msds">  
+      </div>
+      <!-- <div class="form-group row">
+          <label class="col-sm-2" for="approved">Product Approved for Sell :</label>
+          <input formControlName="approved" placeholder="Certificate of Analysis" name="approved" class="form-control" class="col-sm-8" id="approved">
+       </div> -->
+  
+      <!-- SHOULD BE IN ADMIN LIST <div class="form-group">       
+          <input type="hidden" formControlName="updateOn" name="updateOn" class="form-control" id="updateOn">
+          <input type="hidden" formControlName="loadedBy" name="loadedBy" class="form-control" id="loadedBy">
+          <input type="hidden" formControlName="approvedBy" name="approvedBy" class="form-control" id="approvedBy">
+       </div> -->
+    <div class="form-group row"  *ngIf="this.action!='viewDocument'">
+        <button type="submit" class="btn btn-primary" (click)="backHistory()">Back</button>
+    </div>
+    <div class="form-group row"  *ngIf="this.action=='viewDocument'">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="reset" class="btn btn-success" id="reset-btn" ng-click="addImagesForm.reset">Reset</button> 
+      </div>
+    </form>
+  </div>

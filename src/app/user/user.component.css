@@ -1,0 +1,19 @@
+.form-control{
+    width: 50%;
+}
+
+.error{
+    color: red;
+    font-size: 15px;
+    font-style: italic;
+    }
+    .asterisc {
+        display: block;
+        color: red;
+        /* margin: -19px 185px; */
+      }
+.required:after{
+        content:" *";
+        font-weight:bold;
+        color: red;
+      }

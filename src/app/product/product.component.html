@@ -1,0 +1,125 @@
+<!-- <app-header [isUserLoggedIn]="true" ></app-header> -->
+<div class="col-md-6 mat-app-background">
+  <div>
+    <h2 class="text-center">Product Action</h2>
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="message!=''" style="width:80%">
+    {{message}}
+  </div>
+  <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="name">Name of Product:</label>
+      <input formControlName="name" placeholder="Like coco powder" name="name" class="form-control" class="col-sm-8" id="name">
+      <span *ngIf="!addProductForm.get('name').valid && addProductForm.get('name').touched" class="error">Please enter
+        a valid product</span>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="category">Category :</label>
+      <select formControlName="category" placeholder="Category" name="category" class="form-control" class="col-sm-8"
+        id="category">       
+        <option *ngFor="let itemi of arrCategory" value={{itemi}}>{{itemi}}</option>
+        <!-- <option value="Other">--Other--</option> -->
+      </select>
+
+      <span *ngIf="!addProductForm.get('category').valid && addProductForm.get('category').touched" class="help-block">Please
+        enter a valid category</span>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-8">Product Location :</label>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="state">State:</label>
+      <select formControlName="state" placeholder="State" name="state" class="form-control" class="col-sm-8" id="state">
+        <option *ngFor='let stat of states' value={{stat}}>
+          {{stat}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="city">City:</label>
+      <input formControlName="city" placeholder="City" name="city" class="form-control" class="col-sm-8" id="city">
+      <span *ngIf="!addProductForm.get('city').valid && addProductForm.get('city').touched" class="help-block">Please
+        enter a valid City</span>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4" for="brand">Brand:</label>
+      <input formControlName="brand" placeholder="brand" name="brand" class="form-control" class="col-sm-8" id="brand">
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="dateManufacture">Date of Manufacture:</label>
+      <input type='date' formControlName="dateManufacture" placeholder="DD/MM/YYYY" name="dateManufacture" class="form-control"
+        class="col-sm-8" id="dateManufacture">
+      <span *ngIf="!addProductForm.get('dateManufacture').valid && addProductForm.get('dateManufacture').touched" class="help-block">Please
+        enter a valid date</span>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="dateExpire">Product Expiry Date:</label>
+      <input type='date' formControlName="dateExpire" placeholder="Date Expire" name="dateExpire" class="form-control"
+        class="col-sm-8" id="dateExpire">
+      <span *ngIf="!addProductForm.get('dateExpire').valid && addProductForm.get('dateExpire').touched" class="help-block">Please
+        enter a valid date</span>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="packSize">Size of packet :</label>
+      <input formControlName="packSize" placeholder="Size of packet in kg/lt etc" name="packSize" class="form-control"
+        class="col-sm-8" id="packSize">
+      <span *ngIf="!addProductForm.get('packSize').valid && addProductForm.get('packSize').touched" class="help-block">Please
+        enter a valid packSize</span>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="availableQty">Available Quantity :</label>
+      <input formControlName="availableQty" placeholder="Available Quantity" name="availableQty" class="form-control"
+        class="col-sm-8" id="availableQty">
+      <span *ngIf="!addProductForm.get('availableQty').valid && addProductForm.get('availableQty').touched" class="help-block">Please
+        enter a valid quantity</span>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="qtyExpressed">Quantity Expressed Unit :</label>
+      <select formControlName="qtyExpressed" placeholder="Product unit expresse in KG/LT/NO" name="qtyExpressed" class="form-control"
+        class="col-sm-8" id="qtyExpressed">
+        <option *ngFor='let qty of quantityExpressUnit' value={{qty}}>
+          {{qty}}
+        </option>
+      </select>
+      <span *ngIf="!addProductForm.get('qtyExpressed').valid && addProductForm.get('qtyExpressed').touched" class="help-block">Please
+        enter a valid quantity expressed unit</span>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="unitPrice">Price per (KG/LT/NO) :</label>
+      <input formControlName="unitPrice" placeholder="Price Per Unit" name="unitPrice" class="form-control" class="col-sm-8"
+        id="unitPrice">
+      <span *ngIf="!addProductForm.get('unitPrice').valid && addProductForm.get('unitPrice').touched" class="help-block">Please
+        enter a valid unitPrice</span>
+    </div>
+    <div class="form-group row" *ngIf="this.action=='buy'">
+      <label class="col-sm-4 control-label" for="buyQuantity">Buy Units :</label>
+      <input formControlName="buyQuantity" placeholder="Number of Units to buy" name="buyQuantity" class="form-control"
+        class="col-sm-8" id="buyQuantity">
+      <span *ngIf="!addProductForm.get('buyQuantity').valid && addProductForm.get('buyQuantity').touched" class="help-block">Please
+        enter a valid buy unit</span>
+    </div>
+    <div class="form-group row" *ngIf="this.action=='buy'">
+      <label class="col-sm-4 control-label" for="buyerMessage">Message From Buyer :</label>
+      <input formControlName="buyerMessage" placeholder="Message From Buyer" name="buyerMessage" class="form-control"
+        class="col-sm-8" id="buyerMessage">
+    </div>
+    <div class="form-group row" *ngIf="this.action!='buy' && this.action!='view'">
+      &nbsp;<button type="submit" class="btn btn-primary">Save</button>&nbsp;
+      <button type="reset" class="btn btn-success" id="reset-btn" ng-click="addProductForm.reset">Reset</button>&nbsp;
+    </div>
+    <div class="form-group row" *ngIf="this.action=='buy'">
+      &nbsp;<button type="submit" class="btn btn-primary" (click)="buyTransaction()">Buy</button>
+    </div>
+    <div class="form-group row" *ngIf="this.action=='view' || this.action=='buy'">
+        &nbsp;<button type="submit" class="btn btn-primary" (click)="backHistory()">Back</button>
+      </div>
+  </form>
+</div>

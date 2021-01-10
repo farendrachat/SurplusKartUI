@@ -1,0 +1,38 @@
+
+<div class="container">
+    <br><br>
+    <!-- <div *ngIf="userData.role==='ADMIN' || userData.role==='PROD_MANAGER'"> -->
+    <h2 style="display: inline;">Add Product</h2>
+    <a (click)="onAdd()"><img src="../../assets/add-product-icon.png" style="cursor: pointer;"></a><hr><br>
+    <p>{{message}}</p>            
+    <table class="table table-hover" *ngIf="products">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products | paginate: { itemsPerPage: 5, currentPage: p }">
+          <td>{{product.name}}</td>
+          <!-- <td>{{product.price}}</td>
+          <td>{{product.quantity}}</td> -->
+          <td>{{product.category}}</td>
+          <td>{{product.availableQty}}</td>         
+          <td *ngIf="userData.role==='ADMIN'"><a (click)="onEdit(product.prId)"><img src="../../assets/edit-icon.png" class="icon"></a>            
+            <a (click)="onDelete(product.prId)"><img src="../../assets/delete-icon.png" class="icon"></a>
+            <a (click)="onBuy(product.prId)"><img src="../../assets/buy-icon.jpg" class="icon"></a>
+            <!-- <a routerLink="/add-images" > Add Documents</a> -->
+            <a (click)="doDocuments(product.prId)"><img src="../../assets/documents.png" class="icon"></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br><br>
+    <div class="page" *ngIf="products">
+      <pagination-controls (pageChange)="p = $event" ></pagination-controls>
+    </div>
+  </div>
+  
