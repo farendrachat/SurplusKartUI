@@ -10,6 +10,9 @@ import { ProductComponent } from './product/product.component';
 import { ImagesComponent } from './images/images.component';
 import { BuyerComponent } from './buyer/buyer.component';
 import { ImageShowComponent } from './image-show/image-show.component';
+import { TransactionComponent } from './transaction/transaction.component';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { SellerTransactionsComponent } from './seller-transactions/seller-transactions.component';
 
 
 const routes:Routes=[
@@ -30,7 +33,9 @@ const routes:Routes=[
     {path:'buyer/view/:id/:action',component:ProductComponent},
     {path:'buyer',component:BuyerComponent},
     {path:'buyer/image-show/:id/:action',component:ImageShowComponent},
-    // {path:'transaction',component:TransactionComponent},
+    {path:'transactions',component:TransactionsComponent},
+    {path:'transaction/:id/:action',component:TransactionComponent},
+    {path:'sellerTransactions',component:SellerTransactionsComponent},
 
   ]},
   {path:'**',redirectTo:"login"}

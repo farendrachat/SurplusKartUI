@@ -39,7 +39,7 @@ export class ProductComponent implements OnInit {
     this.addProductForm = this.formBuilder.group({
       name: [null, [Validators.required,Validators.maxLength(50)]],
       category: [null, Validators.required],
-      availableQty: [null, [Validators.required,Validators.pattern(/^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$/),Validators.maxLength(5) ]],
+      availablePackets: [null, [Validators.required,Validators.pattern(/^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$/),Validators.maxLength(5) ]],
       qtyExpressed: [null, [Validators.required]],
       unitPrice: [null,  [Validators.required,Validators.pattern(/^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$/),Validators.maxLength(5) ]],
       state: [null, Validators.required],
@@ -47,10 +47,11 @@ export class ProductComponent implements OnInit {
       brand: [null,[Validators.maxLength(50)]],
       dateManufacture: [null, Validators.required],
       dateExpire: [null, Validators.required],  
-      buyQuantity:[null, Validators.required], 
-      buyerMessage:[null,Validators.required],
+      buyPacketQty:[null, Validators.required], 
+      //buyerMessage:[null,Validators.required],
       prId:[null,],
-      //sellerId:[null,this.userData.userId],
+      sellerId:[null,],
+      loadedBy:[null,],
       // buyerId:[null,this.userData.userId],
       packSize: [null, [Validators.required,Validators.pattern(/^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$/),Validators.maxLength(5)]]
       });
@@ -66,16 +67,16 @@ export class ProductComponent implements OnInit {
           }
         })
       }
-      if (this.prId && this.action=='buy') {
-        this.transactionService.buyTransaction(this.prId).subscribe((res: any) => {
-          if (res.status === "Success") {
-            this.addProductForm.disable();
-            this.addProductForm.get('buyQuantity').enable();
-            this.addProductForm.get('buyerMessage').enable();
-            this.addProductForm.patchValue(res.product)
-          }
-        })
-      }
+      // if (this.prId && this.action=='buy') {
+      //   this.transactionService.buyTransaction(this.prId).subscribe((res: any) => {
+      //     if (res.status === "Success") {
+      //       this.addProductForm.disable();
+      //       this.addProductForm.get('buyPacketQty').enable();
+      //       this.addProductForm.get('buyerMessage').enable();
+      //       this.addProductForm.patchValue(res.product)
+      //     }
+      //   })
+      // }
       if (this.prId && this.action=='view') {
         this.productService.getProduct(this.prId).subscribe((res: any) => {
           if (res.status === "Success") {
@@ -91,7 +92,7 @@ export class ProductComponent implements OnInit {
      this.productService.add(this.addProductForm.value).subscribe((res: any) => {
       if (res.status === "Success")
       {
-        alert("Record Saved Successfully");
+        alert("Record Updated");
         this.router.navigate(["./../../.."], { relativeTo: this.route })
       }
       else
@@ -100,7 +101,8 @@ export class ProductComponent implements OnInit {
       this.message = "Error while proccessing request, try after sometime"
     });
     }
-    else{
+    else{      
+      this.addProductForm.get("sellerId").setValue(this.userData.userId);
       this.productService.add(this.addProductForm.value).subscribe((res: any) => {
         if (res.status === "Success")
           this.router.navigate(["./.."], { relativeTo: this.route })

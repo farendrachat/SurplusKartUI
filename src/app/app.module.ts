@@ -22,6 +22,9 @@ import { ImagesComponent } from './images/images.component';
 import { BuyerComponent } from './buyer/buyer.component';
 import { ImageShowComponent } from './image-show/image-show.component';
 import { TransactionService } from './services/transaction.service';
+import { TransactionComponent } from './transaction/transaction.component';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { SellerTransactionsComponent } from './seller-transactions/seller-transactions.component';
 
 
 @NgModule({
@@ -36,7 +39,10 @@ import { TransactionService } from './services/transaction.service';
     ProductComponent,
     ImagesComponent,
     BuyerComponent,
-    ImageShowComponent
+    ImageShowComponent,
+    TransactionComponent,
+    TransactionsComponent,
+    SellerTransactionsComponent
   ],
   imports: [
     BrowserModule,

@@ -16,7 +16,7 @@
        (change)="onFileSelected($event,'pic1')" id="pic1" class="col-sm-3" required> 
       <img [src]="imgURL" height="200" *ngIf="imgURL">
       <span *ngIf="!addImagesForm.get('pic1').valid && addImagesForm.get('pic1').touched"
-      class="help-block">Please select a valid file</span>
+      class="error">Please select a valid file</span>
       <span *ngIf="addImagesForm.get('pic1').valid && addImagesForm.get('pic1').touched">
         <img [src]="imgURL" height="200" *ngIf="imgURL">
       </span>
@@ -45,7 +45,7 @@
       <input type="file" class="form-control" formControlName="coa" name="coa" 
       (change)="onFileSelected($event,'coa')" id="coa" class="col-sm-3">
       <!-- <span *ngIf="!addImagesForm.get('fname').valid && addImagesForm.get('fname').touched"
-      class="help-block">Please select a valid file</span> -->
+      class="error">Please select a valid file</span> -->
     </div>
 
     <div class="form-group row form-group required">
@@ -71,7 +71,7 @@
      </div> -->
      <div class="form-group row">
       <!-- <span *ngIf="!addImagesForm.valid && addImagesForm.touched"
-          class="help-block">Please select valid data</span> -->
+          class="error">Please select valid data</span> -->
         <!-- <button type="submit" class="btn btn-primary" [disabled]="!addImagesForm.valid" name="submit">Save</button>       -->
         <button type="submit" class="btn btn-primary">Save</button>
         <button type="reset" class="btn btn-success" id="reset-btn" ng-click="addImagesForm.reset">Reset</button> 

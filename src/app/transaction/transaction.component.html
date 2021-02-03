@@ -1,0 +1,73 @@
+<!-- <app-header [isUserLoggedIn]="true" ></app-header> -->
+<div class="col-md-6 mat-app-background">
+  <div>
+    <h2 class="text-center">Transaction</h2>
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="message!=''" style="width:80%">
+    {{message}}
+  </div>
+  <!-- <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()"> -->
+  <form [formGroup]="transactionForm">
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="name">Name of Product:</label>
+      <input formControlName="name" placeholder="Like coco powder" name="name" class="form-control" class="col-sm-8" id="name" readonly>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4" for="brand">Brand:</label>
+      <input formControlName="brand" placeholder="brand" name="brand" class="form-control" class="col-sm-8" id="brand" readonly>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="packSize">Size of packet :</label>
+      <input formControlName="packSize" placeholder="Size of packet in kg/lt etc" name="packSize" class="form-control"
+        class="col-sm-8" id="packSize" readonly>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="availablePackets">Available Packets :</label>
+      <input formControlName="availablePackets" placeholder="Available Quantity of Packets" name="availablePackets" class="form-control"
+        class="col-sm-8" id="availablePackets" readonly>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="qtyExpressed">Quantity Expressed Unit :</label>
+      <select formControlName="qtyExpressed" placeholder="Product unit expresse in KG/LT/NO" name="qtyExpressed" class="form-control"
+        class="col-sm-8" id="qtyExpressed" readonly>
+        <option *ngFor='let qty of quantityExpressUnit' value={{qty}}>
+          {{qty}}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label required" for="unitPrice">Price per (KG/LT/NO) :</label>
+      <input formControlName="unitPrice" placeholder="Price Per Unit" name="unitPrice" class="form-control" class="col-sm-8"
+        id="unitPrice" readonly>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 control-label" for="buyPacketQty">Buy Units :</label>
+      <input formControlName="buyPacketQty" placeholder="Number of Units to buy" name="buyPacketQty" class="form-control"
+        class="col-sm-8" id="buyPacketQty" (keyup)="updateEstimatePrice($event.target.value)">
+      <span *ngIf="!transactionForm.get('buyPacketQty').valid && transactionForm.get('buyPacketQty').touched" class="error">Please
+        enter a valid buy unit</span>
+      <!-- <span *ngIf="transactionForm.get('buyPacketQty').valid && transactionForm.get('estimatedPrice').setValue(5)"></span> -->
+      <span *ngIf="transactionForm.get('buyPacketQty').value > transactionForm.get('availablePackets').value" class="error">Buy 
+        Quantity is more than Available Quantity</span>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 control-label" for="estimatedPrice">Estimated Price :</label>
+      <input formControlName="estimatedPrice" placeholder="Estimated Price" name="estimatedPrice" 
+      class="form-control" class="col-sm-8" id="estimatedPrice" readonly>
+    </div>
+    <!-- <div class="form-group row" *ngIf="this.action!='buy' && this.action!='view'">
+        &nbsp;<button type="submit" class="btn btn-primary">Save</button>&nbsp;
+        <button type="reset" class="btn btn-success" id="reset-btn" ng-click="transactionForm.reset">Reset</button>&nbsp;
+      </div> -->
+    <div class="form-group row" *ngIf="this.action=='buy'">
+      &nbsp;<button type="submit" class="btn btn-primary" (click)="buyTransaction()" [disabled]="!transactionForm.valid">Buy</button>
+    </div>
+    <div class="form-group row" *ngIf="this.action=='view' || this.action=='buy'">
+      &nbsp;<button type="submit" class="btn btn-primary" (click)="backHistory()">Back</button>
+    </div>
+  </form>
+</div>

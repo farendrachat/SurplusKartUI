@@ -4,7 +4,9 @@
     <button class="btn btn-primary" routerLink="users" *ngIf="userData.role==='ADMIN' || userData.role==='CSM' ">Users</button>&nbsp;&nbsp;
     <button class="btn btn-primary" routerLink="products">Seller</button>&nbsp;&nbsp;
     <button class="btn btn-primary" routerLink="buyer">Buyer</button>&nbsp;&nbsp;
-    <button class="btn btn-primary" routerLink="transaction">Transaction</button>
+    <button class="btn btn-primary" routerLink="transactions">Buyer Transactions</button>&nbsp;&nbsp;
+    <button class="btn btn-primary" routerLink="sellerTransactions">Seller Transactions</button>
+    
     <img src="../../assets/logout-icon.png" alt="logouticon" class="icon" (click)="logout()">
   </nav>
 <router-outlet></router-outlet>

@@ -4,7 +4,7 @@ export class Product {
     product: string;
     name: string;
     category: string;
-    availableQty: number;
+    availablePackets: number;
     qtyExpressed: string;
     unitPrice: number;
     state: string;

@@ -82,7 +82,7 @@ msds: [null,Validators.required]
   //   this.transactionService.buyTransaction(this.prId).subscribe((res: any) => {
   //     if (res.status === "Success") {
   //       this.addProductForm.disable();
-  //       this.addProductForm.get('buyQuantity').enable();
+  //       this.addProductForm.get('buyPacketQty').enable();
   //       this.addProductForm.get('buyerMessage').enable();
   //       this.addProductForm.patchValue(res.product)
   //     }

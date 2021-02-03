@@ -45,7 +45,8 @@ export class BuyerComponent implements OnInit {
   }
   onBuy(productId) {
     this.action="buy";
-    this.router.navigate(["edit/"+productId+"/"+this.action],{relativeTo:this.route});
+    // this.router.navigate(["edit/"+productId+"/"+this.action],{relativeTo:this.route});
+    this.router.navigate(["../transaction/"+productId+"/"+this.action],{relativeTo:this.route});
   }
   doDocuments(productId) {
     this.action="viewDocument"

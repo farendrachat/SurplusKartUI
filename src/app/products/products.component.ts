@@ -54,9 +54,15 @@ export class ProductsComponent implements OnInit {
   //   this.router.navigate(["view/"+productId+"/"+this.action],{relativeTo:this.route});
   // }
 
+  // onBuy(productId) {
+  //   this.action="buy";
+  //   this.router.navigate(["edit/"+productId+"/"+this.action],{relativeTo:this.route});
+  // }
+
   onBuy(productId) {
     this.action="buy";
-    this.router.navigate(["edit/"+productId+"/"+this.action],{relativeTo:this.route});
+    // this.router.navigate(["transaction/"+productId+"/"+this.action],{relativeTo:this.route});
+    this.router.navigate(["transaction/"+productId+"/"+this.action]);
   }
 
   doDocuments(productId) {
