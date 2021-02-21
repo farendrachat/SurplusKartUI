@@ -77,14 +77,14 @@
   </div>
   <div class="form-group">
     <label for="city" class="required">City:</label>
-    <input type="text" class="form-control" placeholder="Enter designation in company" formControlName="city">
+    <input type="text" class="form-control" placeholder="Enter city of the company" formControlName="city">
     <span *ngIf="!userForm.get('city').valid && userForm.get('city').touched" class="error">
         City is mandatory !!
     </span>
 </div>
 <div class="form-group">
   <label for="state" class="required">State:</label>
-  <input type="text" class="form-control" placeholder="Enter designation in company" formControlName="state">
+  <input type="text" class="form-control" placeholder="Enter state of the company" formControlName="state">
   <span *ngIf="!userForm.get('state').valid && userForm.get('state').touched" class="error">
       State is mandatory !!
   </span>

@@ -25,7 +25,7 @@ export class TransactionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.userData=this.storageService.getUserData();
-    this.transactionService.viewBuyerTransactions(this.userData.userId).subscribe((res: any) => {
+    this.transactionService.viewUserTransactions(this.userData).subscribe((res: any) => {
      if (res.status === "Success") {
         this.transactions = res.transactions;
         this.message = "Below is the list of all the transactions available:"

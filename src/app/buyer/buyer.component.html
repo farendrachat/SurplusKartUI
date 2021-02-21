@@ -22,10 +22,11 @@
           <td>{{product.category}}</td>
           <td>{{product.availablePackets}}</td>         
           <td>
-            <a (click)="onView(product.prId)" title="View Product"><img src="../../assets/view-icon.jpg" class="icon"></a>
-            <a (click)="onBuy(product.prId)" title="Buy Product"><img src="../../assets/buy-icon.jpg" class="icon"></a>
+            <a (click)="onView(product.prId)" title="View Product"><img src="../../assets/view-icon.jpg" class="icon"></a>            
             <a (click)="doDocuments(product.prId)" title="View Documents"><img src="../../assets/documents.png" class="icon"></a>
-          </td>
+            <a (click)="addToCart(product.prId)" title="Add To Cart"><img src="../../assets/kart.jpg" class="icon"></a>
+            <a (click)="onBuy(product.prId)" title="Payment"><img src="../../assets/pay-icon.jpg" class="icon"></a>
+           </td>
         </tr>
       </tbody>
     </table>

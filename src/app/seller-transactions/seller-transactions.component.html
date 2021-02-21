@@ -11,20 +11,22 @@
           <th>Product Id</th>
           <th>Quantity</th>
           <th>Price</th>
-          <!-- <th>Actions</th> -->
+          <th>Status</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let transaction of transactions | paginate: { itemsPerPage: 5, currentPage: p }">
           <td>{{transaction.prId}}</td>
           <td>{{transaction.buyPacketQty}}</td>
-          <td>{{transaction.estimatedPrice}}</td>
-          <!-- <td *ngIf="userData.role==='ADMIN'">
-            <a><img src="../../assets/edit-icon.png" class="icon"></a>            
-            <a><img src="../../assets/delete-icon.png" class="icon"></a>
-            <a><img src="../../assets/buy-icon.jpg" class="icon"></a>
-            <a><img src="../../assets/documents.png" class="icon"></a>
-          </td> -->
+          <td>{{transaction.estimatedPrice}}</td>  
+          <td>{{transaction.transactionStatus}}</td>
+          <td>
+            <a (click)="updateTransaction(transaction.transId,'MATERIAL_DISPATCHED_BY_SELLER')">
+              <img src="../../assets/dispatch.jpg" title="Material Dispatched" class="icon"></a>      
+            <a (click)="updateTransaction(transaction.transId,'MONEY_REACHED_TO_SELLER')">
+               <img src="../../assets/received-money.jpg" title="Money Received" class="icon"></a>          
+          </td>
         </tr>
       </tbody>
     </table>

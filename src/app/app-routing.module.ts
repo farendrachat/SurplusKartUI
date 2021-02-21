@@ -13,7 +13,8 @@ import { ImageShowComponent } from './image-show/image-show.component';
 import { TransactionComponent } from './transaction/transaction.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { SellerTransactionsComponent } from './seller-transactions/seller-transactions.component';
-
+import { CartComponent } from './cart/cart.component';
+import { AdminTransactionsComponent } from './admin-transactions/admin-transactions.component';
 
 const routes:Routes=[
   {path:'', redirectTo:"login",pathMatch:'full'},
@@ -36,6 +37,8 @@ const routes:Routes=[
     {path:'transactions',component:TransactionsComponent},
     {path:'transaction/:id/:action',component:TransactionComponent},
     {path:'sellerTransactions',component:SellerTransactionsComponent},
+    {path:'cart',component:CartComponent},
+    {path:'adminTransactions',component:AdminTransactionsComponent}
 
   ]},
   {path:'**',redirectTo:"login"}

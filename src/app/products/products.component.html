@@ -21,9 +21,10 @@
           <td>{{product.quantity}}</td> -->
           <td>{{product.category}}</td>
           <td>{{product.availablePackets}}</td>         
-          <td *ngIf="userData.role==='ADMIN'"><a (click)="onEdit(product.prId)"><img src="../../assets/edit-icon.png" class="icon"></a>            
+          <td *ngIf="userData.role==='ADMIN' || userData.userId===product.sellerId">
+            <a (click)="onEdit(product.prId)"><img src="../../assets/edit-icon.png" class="icon"></a>            
             <a (click)="onDelete(product.prId)"><img src="../../assets/delete-icon.png" class="icon"></a>
-            <a (click)="onBuy(product.prId)"><img src="../../assets/buy-icon.jpg" class="icon"></a>
+            <!-- <a (click)="onBuy(product.prId)"><img src="../../assets/buy-icon.jpg" class="icon"></a> -->
             <!-- <a routerLink="/add-images" > Add Documents</a> -->
             <a (click)="doDocuments(product.prId)"><img src="../../assets/documents.png" class="icon"></a>
           </td>

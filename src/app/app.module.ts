@@ -25,6 +25,8 @@ import { TransactionService } from './services/transaction.service';
 import { TransactionComponent } from './transaction/transaction.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { SellerTransactionsComponent } from './seller-transactions/seller-transactions.component';
+import { CartComponent } from './cart/cart.component';
+import { AdminTransactionsComponent } from './admin-transactions/admin-transactions.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { SellerTransactionsComponent } from './seller-transactions/seller-transa
     ImageShowComponent,
     TransactionComponent,
     TransactionsComponent,
-    SellerTransactionsComponent
+    SellerTransactionsComponent,
+    CartComponent,
+    AdminTransactionsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,43 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ProductsService } from '../services/products.service';
+import { CartService } from '../services/cart.service';
 import { StorageService } from '../services/storage.service';
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  selector: 'app-cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class CartComponent implements OnInit {
 
-  products: any;
+  cartItems: any;
   message = "";
   p: number = 1;
   userData:any;
   createMessage="";
   action:any;
 
-  constructor(private productsService: ProductsService,
+  constructor(private cartService: CartService,
     private router: Router,
     private route: ActivatedRoute,
     private storageService:StorageService) { }
 
   ngOnInit(): void {
     this.userData=this.storageService.getUserData();
-    this.productsService.viewProductsForSeller(this.userData).subscribe((res: any) => {
+    this.cartService.viewCartForBuyer(this.userData).subscribe((res: any) => {
       console.log(res);
       if (res.status === "Success") {
-        this.products = res.products;
-        this.message = "Below is the list of all the products available:"
+        this.cartItems = res.cartItems;
+        this.message = "Below is the list of items in the cart:"
       }
       else {
-        this.products = "";
+        this.cartItems = "";
         this.message = res.message;
       }
       console.log(this.message);
     }, err => {
       if (err.status != 0)
-        this.products = err.error.message;
+        this.cartItems = err.error.message;
       else
         this.message = "Error while processing request"
     })
@@ -69,27 +69,32 @@ export class ProductsComponent implements OnInit {
     this.router.navigate(["images/"+productId],{relativeTo:this.route});
   }
 
-  onDelete(productId) {
-    console.log(productId);
-    this.productsService.deleteProduct(productId).subscribe((res:any)=>{
-      console.log(res);
-      if(res.status==="Success"){
-        this.ngOnInit();
-        this.createMessage=res.message;
-      }
-      else{
-        this.createMessage=res.message;
-      }
-    },err=>{
-      if(err.status!=0)
-      this.createMessage=err.error.message;
-      else
-      this.createMessage="Error while processing request"
-    });
-  }
+  // onDelete(productId) {
+  //   console.log(productId);
+  //   this.cartService.deleteItem(productId).subscribe((res:any)=>{
+  //     console.log(res);
+  //     if(res.status==="Success"){
+  //       this.ngOnInit();
+  //       this.createMessage=res.message;
+  //     }
+  //     else{
+  //       this.createMessage=res.message;
+  //     }
+  //   },err=>{
+  //     if(err.status!=0)
+  //     this.createMessage=err.error.message;
+  //     else
+  //     this.createMessage="Error while processing request"
+  //   });
+  // }
 
   onAdd() {
     this.router.navigate(['add'], { relativeTo: this.route });
+  }  
+  checkOut(productId) {
+    this.action="buy";
+    // this.router.navigate(["edit/"+productId+"/"+this.action],{relativeTo:this.route});
+    this.router.navigate(["../transaction/"+productId+"/"+this.action],{relativeTo:this.route});
   }
 
 }

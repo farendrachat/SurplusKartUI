@@ -11,12 +11,25 @@ export class TransactionService {
     return this.httpClient.post(BASE_URL+"buy",buyData);
 }
 
-viewSellerTransactions(sellerId:any){
-  return this.httpClient.get(BASE_URL+"getSellerTransactions/"+sellerId);
+// viewSellerTransactions(sellerId:any){
+//   return this.httpClient.get(BASE_URL+"getSellerTransactions/"+sellerId);
+// }
+
+viewUserTransactions(user:any){
+  if(user.role==='BUYER')
+  return this.httpClient.get(BASE_URL+"getBuyerTransactions/"+user.userId);
+  if(user.role==='SELLER')
+  return this.httpClient.get(BASE_URL+"getSellerTransactions/"+user.userId);
+  if(user.role==='ADMIN')
+  return this.viewAllTransactions();
+
 }
 
-viewBuyerTransactions(buyerId:any){
-  return this.httpClient.get(BASE_URL+"getBuyerTransactions/"+buyerId);
+viewAllTransactions(){
+  return this.httpClient.get(BASE_URL+"getAllTransactions");
 }
 
+changeTransactionStatus(transaction:any){
+  return this.httpClient.post(BASE_URL+"changeTransactionStatus",transaction);
+}
 }

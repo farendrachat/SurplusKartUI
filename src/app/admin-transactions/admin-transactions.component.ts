@@ -5,12 +5,12 @@ import { StorageService } from '../services/storage.service';
 import { Transaction } from '../model/transaction.model';
 
 @Component({
-  selector: 'app-seller-transactions',
-  templateUrl: './seller-transactions.component.html',
-  styleUrls: ['./seller-transactions.component.css'],
+  selector: 'app-admin-transactions',
+  templateUrl: './admin-transactions.component.html',
+  styleUrls: ['./admin-transactions.component.css'],
   providers: [Transaction]
 })
-export class SellerTransactionsComponent implements OnInit {
+export class AdminTransactionsComponent implements OnInit {
 
   transactions: any;
   message = "";
@@ -29,7 +29,7 @@ export class SellerTransactionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.userData=this.storageService.getUserData();
-    this.transactionService.viewUserTransactions(this.userData).subscribe((res: any) => {
+    this.transactionService.viewAllTransactions().subscribe((res: any) => {
      if (res.status === "Success") {
         this.transactions = res.transactions;
         this.message = "Below is the list of all the transactions available:"
@@ -66,4 +66,3 @@ export class SellerTransactionsComponent implements OnInit {
     });
   }
 }
-

@@ -7,27 +7,36 @@ const BASE_URL="http://localhost:9000/api/product/";
 @Injectable()
 export class ProductsService{
 
-    products=[{
-        id:"1",
-        name:"Product1",
-        price:10.5,
-        quantity:1
-    },{
-        id:2,
-        name:"Product2",
-        price:20.5,
-        quantity:2
-    },{
-        id:3,
-        name:"Product3",
-        price:30.5,
-        quantity:3
-    }]
+    // products=[{
+    //     id:"1",
+    //     name:"Product1",
+    //     price:10.5,
+    //     quantity:1
+    // },{
+    //     id:2,
+    //     name:"Product2",
+    //     price:20.5,
+    //     quantity:2
+    // },{
+    //     id:3,
+    //     name:"Product3",
+    //     price:30.5,
+    //     quantity:3
+    // }]
     constructor(private httpClient:HttpClient){
     }
 
     viewAllProducts(){
         return this.httpClient.get(BASE_URL+"products");
+    }
+
+    viewProductsForSeller(userData:any){
+        if(userData.role==='ADMIN'){
+        return this.viewAllProducts();
+        }
+        else{
+        return this.httpClient.get(BASE_URL+"getProductForSeller/"+userData.userId);
+        }
     }
 
     add(productData){

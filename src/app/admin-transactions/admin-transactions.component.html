@@ -8,7 +8,10 @@
     <table class="table table-hover" *ngIf="transactions">
       <thead>
         <tr>
+          <th>Transaction Id</th>
           <th>Product Id</th>
+          <th>Seller Id</th>
+          <th>Buyer Id</th>
           <th>Quantity</th>
           <th>Price</th>
           <th>Status</th>
@@ -17,16 +20,22 @@
       </thead>
       <tbody>
         <tr *ngFor="let transaction of transactions | paginate: { itemsPerPage: 5, currentPage: p }">
+          <td>{{transaction.transId}}</td>
           <td>{{transaction.prId}}</td>
+          <td>{{transaction.sellerId}}</td>
+          <td>{{transaction.buyerId}}</td>
           <td>{{transaction.buyPacketQty}}</td>
-          <td>{{transaction.estimatedPrice}}</td>
+          <td>{{transaction.estimatedPrice}}</td>  
           <td>{{transaction.transactionStatus}}</td>
           <td>
-          <a (click)="updateTransaction(transaction.transId,'MATERIAL_REACHED_BUYER')">
-              <img src="../../assets/materialReceived.png" title="Material Received" class="icon"></a>
-          <a (click)="updateTransaction(transaction.transId,'MATERIAL_APPROVED_BY_BUYER')">
-              <img src="../../assets/materialApproved.png" title="Material Approved" class="icon"></a>
-          </td>
+            <a (click)="updateTransaction(transaction.transId,'MONEY_RESERVED_BY_ADMIN')">
+              <img src="../../assets/received-money.jpg" title="Money reserved by Admin" class="icon"></a>              
+            <a (click)="updateTransaction(transaction.transId,'MONEY_TRANSFERRED_TO_SELLER')">
+               <img src="../../assets/moneyTransferredToSeller.png" title="Money Transferred to Seller" class="icon"></a> 
+            <a (click)="updateTransaction(transaction.transId,'TRANSACTION_COMPLETED')">
+              <img src="../../assets/transactionComplete.png" title="TransactionComplete" class="icon"></a>              
+                
+         </td>
         </tr>
       </tbody>
     </table>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators,FormBuilder,ValidatorFn} from '@angular/forms';
 import { ProductsService } from '../services/products.service';
 import { TransactionService } from '../services/transaction.service';
+import { CartService } from '../services/cart.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from '../../environments/environment'; 
 import {States} from "../../enum/states.enum";
@@ -39,6 +40,7 @@ export class TransactionComponent implements OnInit {
   constructor(
     private productService:ProductsService,
     private transactionService:TransactionService,
+    private cartService:CartService,    
     private router:Router,
     private route:ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -65,22 +67,19 @@ export class TransactionComponent implements OnInit {
       },
       { validator: this.MyAwesomeRangeValidator});
 
-   
-
-  //   this.transactionForm.get('buyPacketQty').valueChanges.subscribe(e => {
-  //  //   control.setValue(e, {emitEvent: false});
-  
-  // //    this.transactionForm.controls.estimatedPrice.setValue(this.estimatedPrice,{emitEvent: false});
-
-  //     // this.transactionForm.patchValue({ estimatedPrice: data.firstName, lastName: data.lastName }, 
-  //     //   { emitEvent: false });
-  // });
-
-
       this.prId = this.route.snapshot.params['id'];
       this.action = this.route.snapshot.params['action'];
      
       if (this.prId && this.action=='buy') {
+        this.productService.getProduct(this.prId).subscribe((res: any) => {
+          if (res.status === "Success") {
+           // this.transactionForm.disable();
+          //  this.transactionForm.get('buyPacketQty').enable();
+            this.transactionForm.patchValue(res.product)
+          }
+        })
+      }
+      if (this.prId && this.action=='addToCart') {
         this.productService.getProduct(this.prId).subscribe((res: any) => {
           if (res.status === "Success") {
            // this.transactionForm.disable();
@@ -125,18 +124,22 @@ export class TransactionComponent implements OnInit {
       this.message = res.message;
   }, err => {
     this.message = "Error while proccessing request, try after sometime"
-  });
-  // }
-  // else{
-  //   this.productService.add(this.transactionForm.value).subscribe((res: any) => {
-  //     if (res.status === "Success")
-  //       this.router.navigate(["./.."], { relativeTo: this.route })
-  //     else
-  //       this.message = res.message;
-  //   }, err => {
-  //     this.message = "Error while proccessing request, try after sometime"
-  //   });
-  // }
+  });  
+}
+
+addToCart(){
+  this.transactionForm.get("buyerId").setValue(this.userData.userId);
+  this.cartService.addToCart(this.transactionForm.value).subscribe((res: any) => {
+   if (res.status === "Success")
+   {
+     alert("Item added to Cart");
+     this.router.navigate(["./../../../buyer"], { relativeTo: this.route })
+   }
+   else
+     this.message = res.message;
+ }, err => {
+   this.message = "Error while proccessing request, try after sometime"
+ });  
 }
 
   // buyTransaction(){

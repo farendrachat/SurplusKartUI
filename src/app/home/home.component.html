@@ -2,11 +2,16 @@
 <nav class="navbar navbar-default bg-light">
     <h5 style="color: orange;cursor: pointer;" (click)="onHomeClick()">Welcome, <i>{{userData.userName}}</i> :)</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <button class="btn btn-primary" routerLink="users" *ngIf="userData.role==='ADMIN' || userData.role==='CSM' ">Users</button>&nbsp;&nbsp;
-    <button class="btn btn-primary" routerLink="products">Seller</button>&nbsp;&nbsp;
-    <button class="btn btn-primary" routerLink="buyer">Buyer</button>&nbsp;&nbsp;
-    <button class="btn btn-primary" routerLink="transactions">Buyer Transactions</button>&nbsp;&nbsp;
-    <button class="btn btn-primary" routerLink="sellerTransactions">Seller Transactions</button>
-    
+    <button class="btn btn-primary" routerLink="products" *ngIf="userData.role==='ADMIN' || userData.role==='CSM' ||
+     userData.role==='SELLER'">Items For Sell</button>&nbsp;&nbsp;
+    <button class="btn btn-primary" routerLink="buyer" *ngIf="userData.role==='ADMIN' || userData.role==='CSM' ||
+    userData.role==='BUYER'" >Items To Buy</button>&nbsp;&nbsp;
+    <button class="btn btn-primary" routerLink="transactions" *ngIf="userData.role==='ADMIN' || userData.role==='CSM' ||
+    userData.role==='BUYER'">Buyer Transactions</button>&nbsp;&nbsp;
+    <button class="btn btn-primary" routerLink="sellerTransactions" *ngIf="userData.role==='ADMIN' || userData.role==='CSM' ||
+    userData.role==='SELLER'">Seller Transactions</button>&nbsp;&nbsp;
+    <button class="btn btn-primary" routerLink="cart" *ngIf="userData.role==='ADMIN' || userData.role==='BUYER'">Cart</button>&nbsp;&nbsp;
+    <button class="btn btn-primary" routerLink="adminTransactions" *ngIf="userData.role==='ADMIN' || userData.role==='CSM' ">Admin Transactions</button>
     <img src="../../assets/logout-icon.png" alt="logouticon" class="icon" (click)="logout()">
   </nav>
 <router-outlet></router-outlet>
